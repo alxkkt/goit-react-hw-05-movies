@@ -1,15 +1,15 @@
 {
-  "name": "hw-03-phonebook",
+  "name": "hw-03-image-finder",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://zeddjke.github.io/goit-react-hw-03-phonebook/",
+  "homepage": "https://zeddjke.github.io/goit-react-hw-03-image-finder/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.27.2",
     "eslint": "^8.15.0",
     "modern-normalize": "^1.1.0",
-    "nanoid": "^3.3.4",
     "notiflix": "^3.2.5",
     "prop-types": "^15.8.1",
     "react": "^18.0.0",
