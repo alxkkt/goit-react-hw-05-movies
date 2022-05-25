@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import ImageGalleryItem from 'components/ImageGalleryItem';
+import ImageGalleryItem from './ImageGalleryItem';
 
 import styles from './ImageGallery.module.css';
 
