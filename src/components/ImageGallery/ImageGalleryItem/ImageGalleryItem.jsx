@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 
 import styles from './ImageGalleryItem.module.css';
 
-const ImageGalleryItem = ({ id, url }) => {
+const ImageGalleryItem = ({ url, onClick }) => {
   return (
-    <li className={styles.ImageGalleryItem} key={id}>
+    <li className={styles.ImageGalleryItem} onClick={onClick}>
       <img
         className={styles.ImageGalleryItemImage}
         src={url}
@@ -15,3 +15,8 @@ const ImageGalleryItem = ({ id, url }) => {
 };
 
 export default ImageGalleryItem;
+
+ImageGalleryItem.propTypes = {
+  url: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};

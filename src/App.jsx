@@ -5,11 +5,12 @@ import Header from 'components/Header';
 import Searchbar from 'components/Header/Searchbar';
 import ImageGallery from 'components/ImageGallery';
 import Loader from 'shared/components/Loader';
+import Button from 'shared/components/Button';
+import Modal from 'shared/components/Modal';
 
 import { getImages } from 'shared/services/images';
 
 import './App.css';
-import Button from 'shared/components/Button';
 
 class App extends Component {
   state = {
@@ -19,7 +20,7 @@ class App extends Component {
     page: 1,
     error: null,
     isModalOpen: false,
-    modalData: {},
+    modalData: '',
   };
   async componentDidUpdate(prevProps, prevState) {
     const { q, page } = this.state;
@@ -65,9 +66,22 @@ class App extends Component {
   onFormSubmit = e => {
     e.preventDefault();
   };
+  showModal = modalData => {
+    this.setState({
+      isModalOpen: true,
+      modalData,
+    });
+  };
+
+  closeModal = () => {
+    this.setState({
+      isModalOpen: false,
+    });
+  };
+
   render() {
-    const { items, isLoading } = this.state;
-    const { setQuery, loadMore } = this;
+    const { items, isLoading, isModalOpen, modalData } = this.state;
+    const { setQuery, loadMore, showModal, closeModal } = this;
 
     return (
       <div className="App">
@@ -75,11 +89,11 @@ class App extends Component {
           <Searchbar onSubmit={setQuery} />
         </Header>
         {Boolean(items.length) && (
-          <>
-            <ImageGallery items={this.state.items} />
+          <ImageGallery items={this.state.items} onClick={showModal}>
             <Button text="Load More" loadMore={loadMore} />
-          </>
+          </ImageGallery>
         )}
+        {isModalOpen && <Modal close={closeModal} imgUrl={modalData} />}
         {isLoading && <Loader isEnabled={isLoading} />}
       </div>
     );

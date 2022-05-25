@@ -1,4 +1,5 @@
 import { SpinnerDiamond } from 'spinners-react';
+import PropTypes from 'prop-types';
 
 import styles from './Loader.module.css';
 
@@ -18,3 +19,7 @@ const Loader = ({ isEnabled }) => {
 };
 
 export default Loader;
+
+Loader.propTypes = {
+  isEnabled: PropTypes.bool.isRequired,
+};
