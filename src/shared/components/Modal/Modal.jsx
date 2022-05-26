@@ -25,13 +25,11 @@ class Modal extends Component {
   };
   render() {
     const { closeModal } = this;
-    const { imgUrl } = this.props;
+    const { children } = this.props;
 
     return createPortal(
       <div className={styles.Overlay} onClick={closeModal}>
-        <div className={styles.Modal}>
-          <img src={imgUrl} alt="Nothing to see here" />
-        </div>
+        <div className={styles.Modal}>{children}</div>
       </div>,
       modalRoot,
     );
@@ -42,5 +40,5 @@ export default Modal;
 
 Modal.propTypes = {
   close: PropTypes.func.isRequired,
-  imgUrl: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };

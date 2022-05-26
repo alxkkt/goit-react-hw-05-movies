@@ -93,7 +93,11 @@ class App extends Component {
             <Button text="Load More" loadMore={loadMore} />
           </ImageGallery>
         )}
-        {isModalOpen && <Modal close={closeModal} imgUrl={modalData} />}
+        {isModalOpen && (
+          <Modal close={closeModal}>
+            <img src={modalData} alt="Nothing to see here" />
+          </Modal>
+        )}
         {isLoading && <Loader isEnabled={isLoading} />}
       </div>
     );
