@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useState, useEffect } from 'react';
 import Notiflix from 'notiflix';
 
 import Header from 'components/Header';
@@ -12,39 +12,50 @@ import { getImages } from 'shared/services/images';
 
 import './App.css';
 
-class App extends Component {
-  state = {
-    q: '',
+const App = () => {
+  const [query, setQuery] = useState('');
+  const [page, setPage] = useState(1);
+  const [state, setState] = useState({
     items: [],
-    isLoading: false,
-    page: 1,
+    loading: false,
     error: null,
+  });
+  const [modal, setModal] = useState({
     isModalOpen: false,
     modalData: '',
+  });
+
+  // const firstRender = useRef(true);
+
+  useEffect(() => {
+    if (!query) {
+      return;
+    }
+
+    const fetchData = async () => {
+      const items = await getImages(query, page);
+
+      setState(prevState => ({
+        items: [...prevState.items, ...items],
+        loading: false,
+      }));
+    };
+    try {
+      setState(prevState => ({ ...prevState, loading: true }));
+      fetchData();
+    } catch (error) {
+      setState(prevState => ({
+        ...prevState,
+        loading: false,
+        error: error.message,
+      }));
+    }
+  }, [query, page]);
+  const loadMore = () => {
+    setPage(page + 1);
   };
-  async componentDidUpdate(prevProps, prevState) {
-    const { q, page } = this.state;
-
-    if (prevState.q !== q || page > prevState.page) {
-      this.setState({
-        isLoading: true,
-      });
-
-      try {
-        const items = await getImages(q, page);
-        this.setState(prevState => {
-          return {
-            items: [...prevState.items, ...items],
-            isLoading: false,
-          };
-        });
-      } catch (error) {
-        this.setState({
-          isLoading: false,
-          error: error.message,
-        });
-      }
-    } else if (!q) {
+  const changeQuery = q => {
+    if (!q) {
       Notiflix.Report.info(
         'Упс',
         'Чтобы получить результат - нужно ввести запрос в поле ввода',
@@ -52,56 +63,40 @@ class App extends Component {
       );
       return;
     }
-  }
-  loadMore = () => {
-    this.setState(({ page }) => {
-      return {
-        page: page + 1,
-      };
-    });
+    setQuery(q);
+    setPage(1);
   };
-  setQuery = q => {
-    this.setState({ q, page: 1, items: [] });
-  };
-  onFormSubmit = e => {
-    e.preventDefault();
-  };
-  showModal = modalData => {
-    this.setState({
+  const showModal = modalData => {
+    setModal({
       isModalOpen: true,
       modalData,
     });
   };
-
-  closeModal = () => {
-    this.setState({
+  const closeModal = () => {
+    setModal(prevState => ({
+      ...prevState,
       isModalOpen: false,
-    });
+    }));
   };
-
-  render() {
-    const { items, isLoading, isModalOpen, modalData } = this.state;
-    const { setQuery, loadMore, showModal, closeModal } = this;
-
-    return (
-      <div className="App">
-        <Header>
-          <Searchbar onSubmit={setQuery} />
-        </Header>
-        {Boolean(items.length) && (
-          <ImageGallery items={this.state.items} onClick={showModal}>
-            <Button text="Load More" loadMore={loadMore} />
-          </ImageGallery>
-        )}
-        {isModalOpen && (
-          <Modal close={closeModal}>
-            <img src={modalData} alt="Nothing to see here" />
-          </Modal>
-        )}
-        {isLoading && <Loader isEnabled={isLoading} />}
-      </div>
-    );
-  }
-}
+  const { loading, items } = state;
+  return (
+    <div className="App">
+      <Header>
+        <Searchbar onSubmit={changeQuery} />
+      </Header>
+      {Boolean(items.length) && (
+        <ImageGallery items={items} onClick={showModal}>
+          <Button text="Load More" loadMore={loadMore} />
+        </ImageGallery>
+      )}
+      {loading && <Loader isEnabled={loading} />}
+      {modal.isModalOpen && (
+        <Modal close={closeModal}>
+          <img src={modal.modalData} alt="Nothing to see here" />
+        </Modal>
+      )}
+    </div>
+  );
+};
 
 export default App;
