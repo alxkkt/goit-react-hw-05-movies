@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import BeatLoader from 'react-spinners/BeatLoader';
 
 import GalleryItem from './GalleryItem';
 
@@ -40,11 +41,15 @@ const Gallery = () => {
       }));
     }
   }, []);
-  const { items, loading, error } = state;
+  const { items, loading } = state;
 
   return (
     <>
-      {loading && <p>...Loading</p>}
+      {loading && (
+        <div className={s.BeatLoader}>
+          <BeatLoader />
+        </div>
+      )}
       {Boolean(items.length) && (
         <div className={s.container}>
           <h1 className={s.homepageTitle}>Trending Today</h1>

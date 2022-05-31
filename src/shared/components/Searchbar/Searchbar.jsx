@@ -1,5 +1,6 @@
 import { useState, memo } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import styles from './Searchbar.module.css';
 
@@ -9,6 +10,8 @@ const Searchbar = ({ onSubmit }) => {
   const handleSubmit = e => {
     e.preventDefault();
     onSubmit(query);
+
+    setQuery('');
   };
   const handleChange = e => {
     const { value } = e.target;
@@ -28,7 +31,7 @@ const Searchbar = ({ onSubmit }) => {
         autoComplete="off"
         autoFocus
         onChange={handleChange}
-        placeholder="Search images and photos"
+        placeholder="Search your favourite movie"
       />
     </form>
   );

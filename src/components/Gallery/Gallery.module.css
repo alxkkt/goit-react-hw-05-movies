@@ -13,3 +13,11 @@
   grid-template-columns: auto auto auto auto;
   gap: 30px;
 }
+.BeatLoader {
+  block-size: 100vh;
+  background-color: antiquewhite;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
