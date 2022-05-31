@@ -1,7 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+
+import GalleryItem from './GalleryItem';
 
 import { getTrendingMovies } from 'shared/services/movies';
+
+import s from './Gallery.module.css';
 
 const Gallery = () => {
   const [state, setState] = useState({
@@ -43,13 +46,14 @@ const Gallery = () => {
     <>
       {loading && <p>...Loading</p>}
       {Boolean(items.length) && (
-        <ul>
-          {items.map(item => (
-            <li key={item.id}>
-              <Link to={`/movies/${item.id}`}>{item.title}</Link>
-            </li>
-          ))}
-        </ul>
+        <div className={s.container}>
+          <h1 className={s.homepageTitle}>Trending Today</h1>
+          <ul className={s.gridList}>
+            {items.map(item => (
+              <GalleryItem key={item.id} {...item} />
+            ))}
+          </ul>
+        </div>
       )}
     </>
   );

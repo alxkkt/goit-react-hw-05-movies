@@ -3,7 +3,10 @@ import { lazy, Suspense } from 'react';
 
 const Layout = lazy(() => import('components/Layout'));
 const HomePage = lazy(() => import('components/pages/HomePage'));
-const SingleMoviePage = lazy(() => import('components/pages/SingleMoviePage'));
+const MovieDetailsPage = lazy(() =>
+  import('components/pages/MovieDetailsPage'),
+);
+const MoviesPage = lazy(() => import('components/pages/MoviesPage'));
 
 const App = () => {
   return (
@@ -12,8 +15,10 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
-            <Route path="movies/:id" element={<SingleMoviePage />} />
+            <Route path="movies" element={<MoviesPage />} />
+            <Route path="movies/:id" element={<MovieDetailsPage />} />
           </Route>
+          <Route path="*" element={<HomePage />} />
         </Routes>
       </Suspense>
     </div>

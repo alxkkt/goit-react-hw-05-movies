@@ -1,14 +1,30 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import { memo } from 'react';
 
-import styles from './Header.module.css';
+import './Layout.css';
+
+const getActiveLink = ({ isActive }) => {
+  return isActive ? 'navListItem active' : 'navListItem';
+};
 
 const Layout = () => {
   return (
     <>
-      <header className={styles.Header}>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/movies">Movies</NavLink>
+      <header className="header">
+        <nav>
+          <ul className="navList">
+            <li className="navListLi">
+              <NavLink className={getActiveLink} to="/">
+                Home
+              </NavLink>
+            </li>
+            <li className="navListLi">
+              <NavLink className={getActiveLink} to="/movies">
+                Movies
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
       </header>
 
       <main>

@@ -3,11 +3,11 @@ import { useState, useEffect, useRef } from 'react';
 
 import { getMovieById } from 'shared/services/movies';
 
-import s from './SingleMoviePage.module.css';
+import s from './MovieDetailsPage.module.css';
 
 const IMG_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
-const SingleMoviePage = () => {
+const MovieDetailsPage = () => {
   const [state, setState] = useState({
     movie: {},
     loading: false,
@@ -81,4 +81,4 @@ const SingleMoviePage = () => {
   );
 };
 
-export default SingleMoviePage;
+export default MovieDetailsPage;

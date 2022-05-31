@@ -1,0 +1,38 @@
+.listItem {
+  /* display: block; */
+}
+
+.itemTitle {
+  width: 180px;
+  font-size: 14px;
+}
+
+.itemContainer {
+  max-width: 250px;
+}
+
+.itemInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 50px;
+  border-left: 0.5px solid gray;
+  border-right: 0.5px solid gray;
+  border-bottom: 0.5px solid gray;
+
+  padding: 10px;
+}
+
+.itemScore {
+  width: 30px;
+  height: 30px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+  background-color: orange;
+  color: white;
+}

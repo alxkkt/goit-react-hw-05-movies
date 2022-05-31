@@ -1,0 +1,15 @@
+.container {
+  max-width: 1200px;
+  margin: 30px auto;
+}
+.homepageTitle {
+  margin: 20px auto;
+
+  text-align: center;
+}
+
+.gridList {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  gap: 30px;
+}
