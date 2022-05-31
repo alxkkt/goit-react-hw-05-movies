@@ -1,0 +1,45 @@
+.container {
+  max-width: 1200px;
+  margin: 30px auto;
+}
+
+.movieCard {
+  display: flex;
+  padding: 15px;
+
+  border-bottom: 1px grey solid;
+}
+.movieCardPoster {
+  min-width: 360px;
+}
+
+.movieCardDescr {
+  margin-left: 20px;
+}
+
+.movieCardTitle,
+.movieCardScore,
+.movieCardOverviewTitle,
+.movieCardOverview,
+.movieCardGenres,
+.additionalInfoTitle {
+  margin-bottom: 20px;
+}
+
+.additionalInfo {
+  padding: 20px 0;
+  border-bottom: 1px grey solid;
+}
+.additionalInfoList {
+  padding-left: 20px;
+  list-style: square;
+}
+
+.additionalInfoItem:focus {
+  color: orange;
+  text-decoration: underline;
+}
+
+.additionalInfoItem + .additionalInfoItem {
+  margin-top: 10px;
+}

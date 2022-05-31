@@ -26,8 +26,15 @@ p {
   padding: 0;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 h1,
-h2 {
+h2,
+h3,
+h4 {
   margin: 0;
 }
 
@@ -50,11 +57,4 @@ img {
   display: block;
   max-width: 100%;
   height: auto;
-}
-
-.App {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 16px;
-  padding-bottom: 24px;
 }
