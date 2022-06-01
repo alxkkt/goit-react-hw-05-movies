@@ -1,22 +1,22 @@
 import { useState, memo } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 import styles from './Searchbar.module.css';
 
 const Searchbar = ({ onSubmit }) => {
-  const [query, setQuery] = useState('');
+  const [state, setState] = useState({
+    query: '',
+  });
 
   const handleSubmit = e => {
     e.preventDefault();
-    onSubmit(query);
-
-    setQuery('');
+    onSubmit({ ...state });
+    setState({ query: '' });
   };
   const handleChange = e => {
-    const { value } = e.target;
+    const { name, value } = e.target;
 
-    setQuery(value);
+    setState(prevState => ({ ...prevState, [name]: value }));
   };
   return (
     <form className={styles.SearchForm} onSubmit={handleSubmit}>
@@ -27,8 +27,9 @@ const Searchbar = ({ onSubmit }) => {
       <input
         className={styles.SearchFormInput}
         type="text"
-        name={query}
+        name="query"
         autoComplete="off"
+        value={state.q}
         autoFocus
         onChange={handleChange}
         placeholder="Search your favourite movie"

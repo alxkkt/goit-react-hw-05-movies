@@ -1,0 +1,13 @@
+.reviewTitle {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.reviewContent {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.reviewContainer {
+  padding: 20px 0;
+}

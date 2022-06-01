@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import BeatLoader from 'react-spinners/BeatLoader';
 
 import GalleryItem from './GalleryItem';
@@ -13,13 +13,8 @@ const Gallery = () => {
     loading: false,
     error: null,
   });
-  const firstRender = useRef(true);
 
   useEffect(() => {
-    if (firstRender.current) {
-      firstRender.current = false;
-      return;
-    }
     const fetchTrendingMovies = async () => {
       const data = await getTrendingMovies();
 

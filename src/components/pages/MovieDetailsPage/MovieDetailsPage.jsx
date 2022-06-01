@@ -1,9 +1,9 @@
 import { useParams, Link, Outlet } from 'react-router-dom';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import BeatLoader from 'react-spinners/BeatLoader';
 
 import { getMovieById } from 'shared/services/movies';
-import IMG_BASE_URL from 'shared/services/api';
+import getImgLink from 'shared/services/posterLink';
 import s from './MovieDetailsPage.module.css';
 
 const MovieDetailsPage = () => {
@@ -13,13 +13,8 @@ const MovieDetailsPage = () => {
     error: null,
   });
   const { movieId } = useParams();
-  const firstRender = useRef(true);
 
   useEffect(() => {
-    if (firstRender.current) {
-      firstRender.current = false;
-      return;
-    }
     const fetchMovieById = async id => {
       const { data } = await getMovieById(id);
       setState(prevState => ({ ...prevState, movie: data, loading: false }));
@@ -48,7 +43,7 @@ const MovieDetailsPage = () => {
           <div className={s.movieCard}>
             <div className={s.movieCardPoster}>
               <img
-                src={`${IMG_BASE_URL}/${poster_path}`}
+                src={getImgLink(poster_path)}
                 alt="Movie Poster"
                 width="360"
               />
@@ -75,9 +70,9 @@ const MovieDetailsPage = () => {
               </li>
             </ul>
           </div>
+          <Outlet />
         </div>
       )}
-      <Outlet />
     </>
   );
 };

@@ -28,3 +28,15 @@ export const getMovieByQuery = async query => {
 
   return data.results;
 };
+
+export const getMovieReview = async id => {
+  const { data } = await instance.get(`/movie/${id}/reviews`);
+
+  return data.results;
+};
+
+export const getMovieCredits = async id => {
+  const { data } = await instance.get(`/movie/${id}/credits`);
+
+  return data.cast;
+};
