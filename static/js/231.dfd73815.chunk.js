@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkhw_05_movies=self.webpackChunkhw_05_movies||[]).push([[231],{231:function(e,s,i){i.r(s),i.d(s,{default:function(){return r}});var n=i(501),t=i(184),r=function(){return(0,t.jsxs)("div",{style:{blockSize:"100vh",display:"grid",placeItems:"center"},children:[(0,t.jsx)("p",{children:"Opps, this page doesn't exist, loshara"}),(0,t.jsx)(n.rU,{to:"/",children:"\u0412\u0435\u0440\u043d\u0443\u0442\u044c\u0441\u044f \u0434\u043e\u043c\u043e\u0439"})]})}}}]);
-//# sourceMappingURL=231.dfd73815.chunk.js.map
