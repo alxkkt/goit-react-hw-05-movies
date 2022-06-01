@@ -1,4 +1,7 @@
 import { Link } from 'react-router-dom';
+import errImage from '../../../404image.webp';
+
+import s from './NotFoundPage.module.css';
 
 const NotFoundPage = () => {
   return (
@@ -9,8 +12,10 @@ const NotFoundPage = () => {
         placeItems: 'center',
       }}
     >
-      <p>Opps, this page doesn't exist, loshara</p>
-      <Link to="/">Вернуться домой</Link>
+      <img src={errImage} alt="" />
+      <Link to="/" className={s.homeLink}>
+        Вернуться домой
+      </Link>
     </div>
   );
 };

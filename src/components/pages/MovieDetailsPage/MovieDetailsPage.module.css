@@ -43,3 +43,16 @@
 .additionalInfoItem + .additionalInfoItem {
   margin-top: 10px;
 }
+
+.returnBtn {
+  cursor: pointer;
+
+  border: none;
+  border-radius: 50%;
+
+  padding: 30px;
+  background-color: linen;
+  color: #212121;
+
+  font-size: 14px;
+}
