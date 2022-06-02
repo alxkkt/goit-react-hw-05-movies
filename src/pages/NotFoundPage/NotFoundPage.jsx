@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import errImage from '../../../404image.webp';
+import errImage from '../../404image.webp';
 
 import s from './NotFoundPage.module.css';
 

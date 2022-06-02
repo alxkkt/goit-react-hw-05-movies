@@ -15,7 +15,7 @@ const MovieDetailsPage = () => {
   const { movieId } = useParams();
 
   const navigate = useNavigate();
-  const goBack = () => navigate(-1);
+  const goHome = () => navigate('/');
 
   useEffect(() => {
     const fetchMovieById = async id => {
@@ -42,7 +42,7 @@ const MovieDetailsPage = () => {
       {error && <p>{error}</p>}
       {movie && (
         <div className={s.container}>
-          <button type="button" onClick={goBack} className={s.returnBtn}>
+          <button type="button" onClick={goHome} className={s.returnBtn}>
             Go Back
           </button>
           <div className={s.movieCard}>
