@@ -1,4 +1,10 @@
-import { useParams, Link, Outlet, useNavigate } from 'react-router-dom';
+import {
+  useParams,
+  Link,
+  Outlet,
+  useNavigate,
+  useLocation,
+} from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import BeatLoader from 'react-spinners/BeatLoader';
 
@@ -15,7 +21,10 @@ const MovieDetailsPage = () => {
   const { movieId } = useParams();
 
   const navigate = useNavigate();
-  const goHome = () => navigate('/');
+  const location = useLocation();
+  const from = location.state?.from || '/movies';
+
+  const goBack = () => navigate(from);
 
   useEffect(() => {
     const fetchMovieById = async id => {
@@ -42,7 +51,7 @@ const MovieDetailsPage = () => {
       {error && <p>{error}</p>}
       {movie && (
         <div className={s.container}>
-          <button type="button" onClick={goHome} className={s.returnBtn}>
+          <button type="button" onClick={goBack} className={s.returnBtn}>
             Go Back
           </button>
           <div className={s.movieCard}>
