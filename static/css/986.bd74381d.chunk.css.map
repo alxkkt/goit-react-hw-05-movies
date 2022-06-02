@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/986.bd74381d.chunk.css","mappings":"AAAA,+BAIE,sBAAwB,CACxB,iBAAkB,CAHlB,aAAc,CADd,gBAKF","sources":["pages/NotFoundPage/NotFoundPage.module.css"],"sourcesContent":[".homeLink {\n  padding: 5px 15px;\n  color: #212121;\n\n  border: 0.5px solid gray;\n  border-radius: 5px;\n}\n"],"names":[],"sourceRoot":""}
