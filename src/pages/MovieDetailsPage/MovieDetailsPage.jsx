@@ -22,7 +22,7 @@ const MovieDetailsPage = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from || '/movies';
+  const from = location.state?.from;
 
   const goBack = () => navigate(from);
 
@@ -79,10 +79,14 @@ const MovieDetailsPage = () => {
             <h4 className={s.additionalInfoTitle}>Additional Information</h4>
             <ul className={s.additionalInfoList}>
               <li className={s.additionalInfoItem}>
-                <Link to={`/movies/${movieId}/cast`}>Cast</Link>
+                <Link state={{ from }} to={`/movies/${movieId}/cast`}>
+                  Cast
+                </Link>
               </li>
               <li className={s.additionalInfoItem}>
-                <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
+                <Link state={{ from }} to={`/movies/${movieId}/reviews`}>
+                  Reviews
+                </Link>
               </li>
             </ul>
           </div>

@@ -1,13 +1,15 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import s from './GalleryItem.module.css';
 import getPosterLink from 'shared/services/posterLink';
 
 const GalleryItem = ({ id, title, poster_path, vote_average }) => {
+  const location = useLocation();
+
   return (
     <li className={s.listItem}>
-      <Link to={`/movies/${id}`}>
+      <Link state={{ from: location }} to={`/movies/${id}`}>
         <div className={s.itemContainer}>
           <img src={getPosterLink(poster_path)} alt={title} />
           <div className={s.itemInfo}>
