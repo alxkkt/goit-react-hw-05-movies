@@ -1,10 +1,17 @@
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import s from './GalleryItem.module.css';
-import getPosterLink from 'shared/services/posterLink';
+import getPosterLink from '../../../shared/services/posterLink';
 
-const GalleryItem = ({ id, title, poster_path, vote_average }) => {
+export type Item = {
+  id: string;
+  title: string;
+  poster_path: string;
+  vote_average: number;
+}
+
+const GalleryItem = ({ id, title, poster_path, vote_average }: Item) => {
   const location = useLocation();
 
   return (
@@ -25,13 +32,3 @@ const GalleryItem = ({ id, title, poster_path, vote_average }) => {
 };
 
 export default GalleryItem;
-
-GalleryItem.defaultProps = {
-  poster_path: PropTypes.string,
-};
-
-GalleryItem.propTypes = {
-  vote_average: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
-};

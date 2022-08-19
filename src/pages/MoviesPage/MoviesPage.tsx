@@ -1,15 +1,23 @@
-import { useState, useEffect } from 'react';
+import React ,{ useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { getMovieByQuery } from 'shared/services/movies';
+import { getMovieByQuery } from '../../shared/services/movies';
 
-import Searchbar from 'shared/components/Searchbar';
-import GalleryItem from 'components/Gallery/GalleryItem';
+import Searchbar from '../../shared/components/Searchbar';
+import GalleryItem from '../../components/Gallery/GalleryItem';
 
 import s from './MoviesPage.module.css';
 
+import { Item } from '../../components/Gallery/GalleryItem/GalleryItem';
+
+interface IState {
+  items: Item[];
+  loading: boolean;
+  error: null | Error;
+}
+
 const MoviesPage = () => {
-  const [loader, setLoader] = useState({
+  const [loader, setLoader] = useState<IState>({
     items: [],
     loading: false,
     error: null,
@@ -22,13 +30,13 @@ const MoviesPage = () => {
     const fetchPosts = async () => {
       setLoader(prevState => ({ ...prevState, loading: true }));
       try {
-        const result = await getMovieByQuery(query);
+        const result = await getMovieByQuery(query!);
         setLoader(prevState => ({
           ...prevState,
           loading: false,
           items: result,
         }));
-      } catch (error) {
+      } catch (error: any) {
         setLoader(prevState => ({
           ...prevState,
           loading: false,
@@ -41,7 +49,7 @@ const MoviesPage = () => {
     }
   }, [query]);
 
-  const handleSubmit = ({ query }) => setSearchParams({ query });
+  const handleSubmit = ({ query }: {query: string}) => setSearchParams({ query });
 
   const { items } = loader;
 

@@ -1,14 +1,21 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import BeatLoader from 'react-spinners/BeatLoader';
 
 import GalleryItem from './GalleryItem';
 
-import { getTrendingMovies } from 'shared/services/movies';
+import { getTrendingMovies } from '../../shared/services/movies';
+import { Item } from './GalleryItem/GalleryItem';
 
 import s from './Gallery.module.css';
 
+interface IState {
+  items: Item[];
+  loading: boolean;
+  error: unknown;
+}
+
 const Gallery = () => {
-  const [state, setState] = useState({
+  const [state, setState] = useState<IState>({
     items: [],
     loading: false,
     error: null,
@@ -28,7 +35,7 @@ const Gallery = () => {
     try {
       setState(prevState => ({ ...prevState, loading: true }));
       fetchTrendingMovies();
-    } catch (error) {
+    } catch (error: any) {
       setState(prevState => ({
         ...prevState,
         loading: false,

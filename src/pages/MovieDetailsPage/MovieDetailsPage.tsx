@@ -5,15 +5,40 @@ import {
   useNavigate,
   useLocation,
 } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import BeatLoader from 'react-spinners/BeatLoader';
 
-import { getMovieById } from 'shared/services/movies';
-import getImgLink from 'shared/services/posterLink';
+import { getMovieById } from '../../shared/services/movies';
+import getImgLink from '../../shared/services/posterLink';
 import s from './MovieDetailsPage.module.css';
 
+type Genre = {
+  name: string;
+}
+
+type Movie = {
+  title: string;
+  poster_path: string;
+  release_date: string;
+  vote_average?: number;
+  overview: string;
+  genres: Genre[];
+}
+
+interface IState {
+  movie: null | Movie;
+  loading: boolean;
+  error: Error | null;
+}
+
+interface LocationState {
+  from: {
+    pathname: string;
+  };
+}
+
 const MovieDetailsPage = () => {
-  const [state, setState] = useState({
+  const [state, setState] = useState<IState>({
     movie: null,
     loading: false,
     error: null,
@@ -22,20 +47,20 @@ const MovieDetailsPage = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from;
+  const { from } = location.state as LocationState;
 
   const goBack = () => navigate(from);
 
   useEffect(() => {
-    const fetchMovieById = async id => {
+    const fetchMovieById = async (id: string) => {
       const { data } = await getMovieById(id);
       setState(prevState => ({ ...prevState, movie: data, loading: false }));
     };
 
     try {
       setState(prevState => ({ ...prevState, loading: true }));
-      fetchMovieById(movieId);
-    } catch (error) {
+      fetchMovieById(movieId!);
+    } catch (error: any) {
       setState(prevState => ({
         ...prevState,
         loading: false,
@@ -48,7 +73,7 @@ const MovieDetailsPage = () => {
   return (
     <>
       {loading && <BeatLoader />}
-      {error && <p>{error}</p>}
+      {error && <p>{error.message}</p>}
       {movie && (
         <div className={s.container}>
           <button type="button" onClick={goBack} className={s.returnBtn}>

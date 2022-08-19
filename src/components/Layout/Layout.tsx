@@ -1,9 +1,13 @@
 import { NavLink, Outlet } from 'react-router-dom';
-import { memo } from 'react';
+import React, { memo } from 'react';
 
 import './Layout.css';
 
-const getActiveLink = ({ isActive }) => {
+type TIsActive = {
+  isActive: boolean;
+}
+
+const getActiveLink = ({ isActive }: TIsActive) => {
   return isActive ? 'navListItem active' : 'navListItem';
 };
 

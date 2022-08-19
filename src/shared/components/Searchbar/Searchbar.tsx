@@ -1,19 +1,25 @@
-import { useState, memo } from 'react';
-import PropTypes from 'prop-types';
+import React,{ useState, memo } from 'react';
 
 import styles from './Searchbar.module.css';
 
-const Searchbar = ({ onSubmit }) => {
+type onSubmit = {
+  onSubmit: (param: {query: string}) => void;
+}
+
+const Searchbar = ({ onSubmit }: onSubmit) => {
   const [state, setState] = useState({
     query: '',
   });
 
-  const handleSubmit = e => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     onSubmit({ ...state });
+
     setState({ query: '' });
   };
-  const handleChange = e => {
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
     setState(prevState => ({ ...prevState, [name]: value }));
@@ -29,7 +35,7 @@ const Searchbar = ({ onSubmit }) => {
         type="text"
         name="query"
         autoComplete="off"
-        value={state.q}
+        value={state.query}
         autoFocus
         onChange={handleChange}
         placeholder="Search your favourite movie"
@@ -39,7 +45,3 @@ const Searchbar = ({ onSubmit }) => {
 };
 
 export default memo(Searchbar);
-
-Searchbar.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};

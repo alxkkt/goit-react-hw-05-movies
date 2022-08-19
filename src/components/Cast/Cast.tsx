@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { getMovieCredits } from 'shared/services/movies';
-import getPosterLink from 'shared/services/posterLink';
+import { getMovieCredits } from '../../shared/services/movies';
+import getPosterLink from '../../shared/services/posterLink';
 
 import s from './Cast.module.css';
 
@@ -15,7 +15,7 @@ const Cast = () => {
   const { movieId } = useParams();
 
   useEffect(() => {
-    const fetchReview = async id => {
+    const fetchReview = async (id: string) => {
       const data = await getMovieCredits(id);
       setState(prevState => ({
         ...prevState,
@@ -26,8 +26,8 @@ const Cast = () => {
 
     try {
       setState(prevState => ({ ...prevState, loading: true }));
-      fetchReview(movieId);
-    } catch (error) {
+      fetchReview(movieId!);
+    } catch (error: any) {
       setState(prevState => ({
         ...prevState,
         loading: false,
